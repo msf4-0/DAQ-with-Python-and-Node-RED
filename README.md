@@ -21,7 +21,7 @@ To be able to run the application, below is the list of items required:
 ***Anaconda packages location: C:\Users\UserName\anaconda3\envs\EnvironmentName\Lib\site-packages<br />***
 
 ### Implementation
-Once the installation is complete, run the python script accordingly. [Click here](https://youtu.be/Tpk5un1Kb3Y) to see the deployment guide.
+Once the installation is complete, run the python script (can be found [here](https://github.com/msf4-0/DAQ-with-Python-and-Node-RED/tree/main/Python%20Code)) accordingly. [Click here](https://youtu.be/Tpk5un1Kb3Y) to see the deployment guide.
 
 ## Node-RED:link:
 This repo also features some integration with Node-RED. The sample flow of the MQTT and GUI can be found [here](https://github.com/msf4-0/DAQ-with-Python-and-Node-RED/tree/main/NodeRed).
