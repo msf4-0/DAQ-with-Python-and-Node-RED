@@ -1,0 +1,406 @@
+[
+    {
+        "id": "a274d74267b84876",
+        "type": "tab",
+        "label": "DAQ Digital Input",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6493641a56fcffd8",
+        "type": "mqtt in",
+        "z": "a274d74267b84876",
+        "name": "",
+        "topic": "DAQ/DI",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "3010ea4435b1a8fe",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 120,
+        "wires": [
+            [
+                "b417c9890d688ced",
+                "b1c49a630601ef37"
+            ]
+        ]
+    },
+    {
+        "id": "b417c9890d688ced",
+        "type": "debug",
+        "z": "a274d74267b84876",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 130,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "52c9584090833676",
+        "type": "function",
+        "z": "a274d74267b84876",
+        "name": "",
+        "func": "var dataTable = []\n\nfor (i = 0; i < msg.payload.length; i++){\n    var connection = {};\n    connection[\"Channel\"] = i;\n    connection[\"DI\"] = msg.payload.charAt(i);\n    dataTable.push(connection)\n    if(msg.payload.charAt(i) == 1){\n        connection[\"Image\"] = \"http://clipart-library.com/new_gallery/circle-clipart-26.png\"\n    }\n    else{\n         connection[\"Image\"] = \"https://i.im.ge/2022/08/23/OiRaYY.circle.png\"\n    }\n}\n\nmsg.payload = dataTable;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 120,
+        "wires": [
+            [
+                "02d3206d0c15dbd7"
+            ]
+        ]
+    },
+    {
+        "id": "b1c49a630601ef37",
+        "type": "rbe",
+        "z": "a274d74267b84876",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 230,
+        "y": 120,
+        "wires": [
+            [
+                "52c9584090833676",
+                "ab909910ed6da222"
+            ]
+        ]
+    },
+    {
+        "id": "ab909910ed6da222",
+        "type": "debug",
+        "z": "a274d74267b84876",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "02d3206d0c15dbd7",
+        "type": "ui_etable",
+        "z": "a274d74267b84876",
+        "payload": "[{\"title\":\"Channel\",\"field\":\"Channel\",\"width\":\"40%\",\"editor\":false},{\"title\":\"DI\",\"field\":\"DI\",\"width\":\"30%\",\"editor\":false},{\"title\":\"Image\",\"field\":\"Image\",\"formatter\":\"image\",\"formatterParams\":{\"height\":\"10px\",\"width\":\"10x\"}}]",
+        "payloadType": "json",
+        "options": "{\"movableColumns\":true,\"layout\":\"fitData\",\"pagination\":\"local\",\"height\":\"920px\"}",
+        "group": "7ab0e419432c0aa9",
+        "name": "",
+        "order": 1,
+        "width": 5,
+        "height": 50,
+        "columns": [],
+        "outputs": 1,
+        "cts": false,
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "ed447aec1388480e"
+            ]
+        ]
+    },
+    {
+        "id": "ed447aec1388480e",
+        "type": "debug",
+        "z": "a274d74267b84876",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d6c6ac4925f34152",
+        "type": "function",
+        "z": "a274d74267b84876",
+        "name": "",
+        "func": "var dataTable = [];\nstate = \"\";\n\nfor(i = 0; i < 32; i++){\n    state = state.concat(\"0\")\n}\n\n\nfor (i = 0; i < state.length; i++){\n    var connection = {};\n    connection[\"Channel\"] = i;\n    connection[\"DI\"] = state.charAt(i);\n    dataTable.push(connection);\n}\n\nmsg.payload = dataTable;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 420,
+        "wires": [
+            [
+                "065272f541668de2"
+            ]
+        ]
+    },
+    {
+        "id": "065272f541668de2",
+        "type": "ui_etable",
+        "z": "a274d74267b84876",
+        "payload": "[{\"title\":\"Channel\",\"field\":\"Channel\",\"width\":\"100%\",\"editor\":false}]",
+        "payloadType": "json",
+        "options": "{}",
+        "group": "7ab0e419432c0aa9",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 1,
+        "cts": false,
+        "x": 450,
+        "y": 420,
+        "wires": [
+            [
+                "fae2590797d14256",
+                "dfb1ae05cc874526"
+            ]
+        ]
+    },
+    {
+        "id": "fae2590797d14256",
+        "type": "debug",
+        "z": "a274d74267b84876",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a1f2098cc7547f97",
+        "type": "debug",
+        "z": "a274d74267b84876",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a17ad1aad662812c",
+        "type": "function",
+        "z": "a274d74267b84876",
+        "name": "",
+        "func": "state = \"\";\n\nfor(i = 0; i < 32; i++){\n    state = state.concat(\"0\");\n}\n\nglobal.set('OutputState', state);\n\nmsg.payload = global.get('OutputState')\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nstate = \"\";\n\nfor(i = 0; i < 32; i++){\n    state = state.concat(\"0\");\n}\n\nglobal.set('OutputState', state)",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 520,
+        "wires": [
+            [
+                "f6a4fbe622bcef52"
+            ]
+        ]
+    },
+    {
+        "id": "595af0bffd239d32",
+        "type": "inject",
+        "z": "a274d74267b84876",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 520,
+        "wires": [
+            [
+                "a17ad1aad662812c"
+            ]
+        ]
+    },
+    {
+        "id": "f6a4fbe622bcef52",
+        "type": "mqtt out",
+        "z": "a274d74267b84876",
+        "name": "",
+        "topic": "DAQ/DO",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3010ea4435b1a8fe",
+        "x": 760,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "dfb1ae05cc874526",
+        "type": "function",
+        "z": "a274d74267b84876",
+        "name": "",
+        "func": "String.prototype.replaceAt = function(index, replacement) {\n    return this.substring(0, index) + replacement + this.substring(index + replacement.length);\n}\n\noutputState = global.get('OutputState');\nchannel = msg.payload[\"Channel\"];\n\nif(outputState.charAt(31 - channel) == \"1\"){\n    outputState = outputState.replaceAt((31 - channel), \"0\");\n}\nelse if(outputState.charAt(31 - channel) == \"0\"){\n    outputState = outputState.replaceAt((31 - channel), \"1\");\n}\n\nglobal.set('OutputState', outputState);\n\nmsg.payload = global.get('OutputState');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "f6a4fbe622bcef52",
+                "a1f2098cc7547f97"
+            ]
+        ]
+    },
+    {
+        "id": "b8a0f2d5b069ef4c",
+        "type": "inject",
+        "z": "a274d74267b84876",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "d6c6ac4925f34152"
+            ]
+        ]
+    },
+    {
+        "id": "29c36f0f95ab7586",
+        "type": "comment",
+        "z": "a274d74267b84876",
+        "name": "Digital Input",
+        "info": "",
+        "x": 110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f2ad527903faf5df",
+        "type": "comment",
+        "z": "a274d74267b84876",
+        "name": "Digital Ouput",
+        "info": "",
+        "x": 110,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "7e4ddefea2c86307",
+        "type": "comment",
+        "z": "a274d74267b84876",
+        "name": "Clear the channel (set all to 0)",
+        "info": "",
+        "x": 160,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "3010ea4435b1a8fe",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7ab0e419432c0aa9",
+        "type": "ui_group",
+        "name": "DAQ Test",
+        "tab": "ac0de5e5.b75fb8",
+        "order": 2,
+        "disp": true,
+        "width": "5",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ac0de5e5.b75fb8",
+        "type": "ui_tab",
+        "name": "Tab1",
+        "icon": "dashboard"
+    }
+]
